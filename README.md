@@ -1,0 +1,3 @@
+# Scala Fun
+
+Learning Scala
