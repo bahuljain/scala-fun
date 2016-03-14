@@ -1,5 +1,7 @@
 package leetcode
 
+import scala.annotation.tailrec
+
 object OddEvenLL extends App {
 	def splitOddEven[T](list: List[T]): (List[T], List[T]) = list match {
 		case Nil => (Nil, Nil)
