@@ -35,5 +35,5 @@ object Sets extends App {
 		lines.mkString("\n") + "\n"
 	}
 
-	println(nqueens(8).take(3).map(show).mkString("\n"))
+	println(nqueens(8).take(3).map(show).mkString(" \n"))
 }
