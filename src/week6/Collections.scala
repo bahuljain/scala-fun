@@ -11,7 +11,7 @@ object Collections extends App {
 	val nrange: NumericRange[Double] = -5.0 to 5.0 by 0.5
 	println(nrange)
 
-	val range = 1 to 10
+	val range = 10 - 1 to 1
 
 	println((1 to 10).toList flatMap (x => (1 to 10).toList map (y => (x, y))))
 
