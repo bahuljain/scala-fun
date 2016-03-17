@@ -11,6 +11,4 @@ object Maps extends App {
 	val rev = (for (key <- map.keys; chars <- map(key)) yield (chars -> key)).toMap
 
 	println(rev)
-
-	sealed trait btree[+A]
 }
