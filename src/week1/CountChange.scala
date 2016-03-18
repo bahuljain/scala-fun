@@ -1,6 +1,7 @@
 package week1
 
 object CountChange extends App {
+	//	Still contains some errors 1+1+2 is not considered same as 2+1+1 or 1+2+1
 	def countChange(money: Int, coins: List[Int]): Int = {
 		var store = Array.fill[Int](money + 1)(0)
 		store.update(0, 1)
