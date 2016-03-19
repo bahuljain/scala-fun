@@ -5,6 +5,9 @@ import math.Ordering
 object Lists extends App {
 	val xs: List[Int] = List(5, 2, 7, 4, 3, 9, 1)
 	println(xs.length)
+	println(xs.takeRight(1)(0))
+	println(xs.init)
+	println(xs.last)
 
 	def isort(l: List[Int]): List[Int] = {
 		def insert(x: Int, l: List[Int]): List[Int] = l match {

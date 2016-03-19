@@ -13,14 +13,9 @@ object MajorityElement extends App {
 				else aux(xs, x, 1)
 		}
 		val maj = aux(nums.tail, nums.head, 1)
+		val count = nums.filter(y => y == maj).length
 
-		@tailrec
-		def count(nums: List[Int], x: Int, c: Int): Int = nums match {
-			case Nil => c
-			case y :: ys => if (x == y) count(ys, x, c + 1) else count(ys, x, c)
-		}
-
-		if (count(nums, maj, 0) > nums.length / 2) Some(maj)
+		if (count > nums.length / 2) Some(maj)
 		else None
 	}
 

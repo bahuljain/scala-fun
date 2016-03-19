@@ -1,4 +1,7 @@
-package programming_in_scala
+package programming_in_scala.ch1
+
+import scala.BigInt
+import scala.math.BigInt.int2bigInt
 
 object BigInts extends App {
 	def factorial(x: Int): BigInt =
