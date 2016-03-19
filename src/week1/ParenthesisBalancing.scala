@@ -17,5 +17,5 @@ object ParenthesisBalancing extends App {
 		aux(str, 0)
 	}
 
-	println(isBalanced("(())()()()()((())".toList))
+	println(isBalanced("(())()()())((())".toList))
 }

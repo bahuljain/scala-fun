@@ -22,4 +22,7 @@ object NewtonRoot {
   sqrt(2)                                         //> res0: Double = 1.4142156862745097
   sqrt(4)                                         //> res1: Double = 2.0000000929222947
   sqrt(3)                                         //> res2: Double = 1.7321428571428572
+  
+  val r = Array.range(10, 20, 2)                  //> r  : Array[Int] = Array(10, 12, 14, 16, 18)
+  
 }
