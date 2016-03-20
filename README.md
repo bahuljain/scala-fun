@@ -10,5 +10,9 @@ Learning Scala
 	```
 
 - `flatmap` is a complete genius.
+
 - `mkString(sep)` is a similar to join in python. Loved that feature in python.
+
 - `" " * 3` replicates the string 3 times. Very very awesome and useful.
+
+- `zipWithIndex` should be very useful.
