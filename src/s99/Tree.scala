@@ -13,3 +13,7 @@ case class Node[T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
 object Node {
 	def apply[T](value: T): Node[T] = Node(value, End, End)
 }
+
+case object Bogus extends Tree[Nothing] {
+	override def toString = "BOGUS"
+}
