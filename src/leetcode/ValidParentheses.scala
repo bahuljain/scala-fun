@@ -4,7 +4,7 @@ object ValidParentheses extends App {
 	def isValid(str: String): Boolean = {
 		val map: Map[Char, Char] = Map(')' -> '(', '}' -> '{', ']' -> '[')
 		def aux(stack: List[Char], str: String): Boolean = str.headOption match {
-			case None => true
+			case None => stack.isEmpty
 			case Some(c) => c match {
 				case '(' | '{' | '[' => aux(str.head :: stack, str.tail)
 				case ')' | '}' | ']' =>
@@ -15,5 +15,6 @@ object ValidParentheses extends App {
 		aux(Nil, str)
 	}
 
-	println(isValid("()([){()}{()[][()]}"))
+	assert(isValid("()(){()}{()[][()]}") == true)
+	assert(isValid("{{{{{") == false)
 }

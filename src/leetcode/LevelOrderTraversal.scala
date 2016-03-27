@@ -25,5 +25,25 @@ object LevelOrderTraversal extends App {
 
 	val tree = Node(3, Node(9), Node(20, Node(15), Node(7)))
 
-	println(levelOrder(tree).mkString("\n"))
+	//	println(levelOrder(tree).mkString("\n"))
+
+	//	val t: Tree[Int] = null
+	//
+	//	t match {
+	//		case null => println("Null")
+	//		case x => println(x)
+	//	}
+
+	val tList = List(End, Node(1), null)
+
+	def print(x: List[Tree[Int]]): Unit = x match {
+		case Nil => println("|")
+		case null :: ys =>
+			println("Null"); println(ys)
+		case Node(e, _, _) :: ys =>
+			println(e); print(ys)
+		case End :: ys => println("End"); print(ys)
+	}
+
+	print(tList)
 }

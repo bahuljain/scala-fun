@@ -26,4 +26,6 @@ object TailRecursion extends App {
 
 	println(factorial(10))
 	println(factorialTailRec(10))
+
+	val x: Any = 10
 }
