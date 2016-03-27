@@ -29,4 +29,6 @@ object AddBinary extends App {
 	}
 
 	println(addBinary("101", "11"))
+	println(addBinary("101", "111"))
+	println(addBinary("10101010", "1010101"))
 }
