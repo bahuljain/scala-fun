@@ -17,7 +17,9 @@ Learning Scala
 
 - `zipWithIndex` should be very useful.
 
-- Pure OO: Everything is an object :)
+- `Pure OO`  Everything is an object :)
+
+- Scala supports Rank-1 polymorphism
 
 ## Traits
 - thick interfaces
@@ -26,3 +28,6 @@ Learning Scala
 	- concrete methods: implemented in term of the abstract methods which provides richness to the interface.
 - cannot have class parameters.
 - super calls are statically bound in classes, whereas they are dynamically bound in traits.
+- stackable modifications (tricky):
+	- super classes are stacked in a linear order
+	-
