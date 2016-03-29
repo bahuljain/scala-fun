@@ -2,8 +2,7 @@ package s99
 
 object InternalNodes extends App {
 	def internal[T](root: Tree[T]): List[T] = root match {
-		case End => List()
-		case Node(x, End, End) => List()
+		case End | Node(_, End, End) => List()
 		case Node(x, left, right) => x :: (internal(left) ++ internal(right))
 	}
 
