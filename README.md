@@ -21,6 +21,18 @@ Learning Scala
 
 - Scala supports Rank-1 polymorphism
 
+- `abstract override` in traits for stackable modifications.
+
+- ` `` ` in pattern matching allow variable names to be used as patterns
+
+	```scala
+	val pi = Math.pi
+	Math.E match {
+		case `pi` => "..."
+		case _ => "...."
+	}
+	```
+
 ## Traits
 - thick interfaces
 - contains:
@@ -30,4 +42,9 @@ Learning Scala
 - super calls are statically bound in classes, whereas they are dynamically bound in traits.
 - stackable modifications (tricky):
 	- super classes are stacked in a linear order
-	-
+	- rightmost, trait is called first, followed by traits inherited to the left of it.
+
+#### Tips
+- if the behavior will not be reused, then make it a concrete class
+- if the behavior needs to be inherited from Java code, then use an abstract class.
+- if it might be reused in multiple, unrelated classes, make it a trait. Only traits can be mixed into different parts of the class hierarchy.
