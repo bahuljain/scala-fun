@@ -23,7 +23,7 @@ Learning Scala
 
 - `abstract override` in traits for stackable modifications.
 
-- ` `` ` in pattern matching allow variable names to be used as patterns
+- variables enclosed in back ticks allows them to be used as constant patterns in pattern matching.
 
 	```scala
 	val pi = Math.pi
