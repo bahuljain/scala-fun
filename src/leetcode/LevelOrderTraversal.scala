@@ -25,5 +25,12 @@ object LevelOrderTraversal extends App {
 
 	val tree = Node(3, Node(9), Node(20, Node(15), Node(7)))
 
-	println(levelOrder(tree).mkString("\n"))
+	// Binary Tree Level Order Traversal
+	println(levelOrder(tree).mkString("\n") + "\n")
+
+	// Binary Tree Level Order Traversal II
+	println(levelOrder(tree, false).mkString("\n") + "\n")
+
+	//	Binary Tree Zig-Zag Level Order Traversal
+	println(levelOrder(tree).zipWithIndex.map(x => if (x._2 % 2 != 0) x._1 else x._1.reverse).mkString("\n"))
 }

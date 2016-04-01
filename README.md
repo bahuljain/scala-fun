@@ -2,13 +2,6 @@
 
 Learning Scala
 
-- static types in patterns allowed (wow).
-
-	```scala
-	case x : List[Any] =>
-	case y : Any =>
-	```
-
 - `flatmap` is a complete genius.
 
 - `mkString(sep)` is a similar to join in python. Loved that feature in python.
@@ -23,6 +16,13 @@ Learning Scala
 
 - `abstract override` in traits for stackable modifications.
 
+- types in patterns allowed (typed patterns) (wow).
+
+	```scala
+	case x : List[Any] =>
+	case y : Any =>
+	```
+
 - variables enclosed in back ticks allows them to be used as constant patterns in pattern matching.
 
 	```scala
@@ -30,6 +30,15 @@ Learning Scala
 	Math.E match {
 		case `pi` => "..."
 		case _ => "...."
+	}
+	```
+
+- `_*` - this pattern matches any number of elements in a sequence, including zero elements
+
+	```scala
+	list match {
+		case List(0, _*) => println("found list starting with 0")
+		case _ => println("whatever")
 	}
 	```
 
@@ -48,3 +57,5 @@ Learning Scala
 - if the behavior will not be reused, then make it a concrete class
 - if the behavior needs to be inherited from Java code, then use an abstract class.
 - if it might be reused in multiple, unrelated classes, make it a trait. Only traits can be mixed into different parts of the class hierarchy.
+- for performance abstract classes are better
+- if you don't know anything, start with traits as they provide more flexibility and can be easily changed later on.
