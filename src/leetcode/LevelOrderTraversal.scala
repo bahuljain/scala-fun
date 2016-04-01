@@ -1,8 +1,12 @@
 package leetcode
 
-import s99.{ Tree, Node, End, Bogus }
+import s99.{ Tree, Node, End }
 import scala.collection.immutable.Queue
 import scala.annotation.tailrec
+
+private case object Bogus extends Tree[Nothing] {
+	override def toString = "BOGUS"
+}
 
 object LevelOrderTraversal extends App {
 

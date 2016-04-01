@@ -1,6 +1,6 @@
 package leetcode
 
-import s99.{ Node, End, Tree, Bogus }
+import s99.{ Node, End, Tree }
 import scala.annotation.tailrec
 import scala.collection.immutable.Queue
 

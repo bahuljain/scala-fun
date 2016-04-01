@@ -23,7 +23,8 @@ Learning Scala
 	case y : Any =>
 	```
 
-- variables enclosed in back ticks allows them to be used as constant patterns in pattern matching.
+- variables enclosed in back ticks allows them to be used as constant patterns in
+pattern matching.
 
 	```scala
 	val pi = Math.pi
@@ -41,6 +42,18 @@ Learning Scala
 		case _ => println("whatever")
 	}
 	```
+
+- `case x :: xs @ List(1,2,3) => println(xs)` - this binds the pattern
+`List(1,2,3)` to the variable xs which can then be used on the right hand side.
+This is similar to OCaml construct `as` in pattern matching.
+
+- `sealed` - sealed class cannot have any subclasses apart from the ones created
+in the same file. Important for pattern matching as it restricts the cases
+possible, and helps the compiler give concrete warnings while making erroneous
+pattern matches.
+
+- `@unchecked` - annotation in the selector expression of pattern matching
+suppresses exhaustive pattern checking for the patterns that follow.
 
 ## Traits
 - thick interfaces
