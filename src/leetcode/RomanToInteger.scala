@@ -3,22 +3,13 @@ package leetcode
 object RomanToInteger extends App {
 	def romanToInt(s: String): Int = {
 
-		def get(c: Char): Int = c match {
-			case 'I' => 1
-			case 'V' => 5
-			case 'X' => 10
-			case 'L' => 50
-			case 'C' => 100
-			case 'D' => 500
-			case 'M' => 1000
-			case _ => 0
-		}
+		val map: Map[Char, Int] = Map('I' -> 1, 'V' -> 5, 'X' -> 10, 'L' -> 50, 'C' -> 100, 'D' -> 500, 'M' -> 1000)
 
 		def aux(roman: List[Char], acc: Int): Int = roman match {
 			case Nil => acc
-			case c :: Nil => acc + get(c)
-			case c :: d :: cs if (get(c) <= get(d)) => aux(d :: cs, acc + get(c))
-			case c :: d :: cs => aux(cs, acc + get(c) - get(d))
+			case c :: Nil => acc + map.getOrElse(c, 0)
+			case c :: d :: cs if (map.getOrElse(c, 0) <= map.getOrElse(c, 0)) => aux(d :: cs, acc + map.getOrElse(c, 0))
+			case c :: d :: cs => aux(cs, acc + map.getOrElse(c, 0) - map.getOrElse(c, 0))
 		}
 
 		aux(s.toUpperCase().toList.reverse, 0)
