@@ -8,6 +8,11 @@ Learning Scala
 
 - `" " * 3` replicates the string 3 times. Very very awesome and useful.
 
+- `def echo(args: String*)` denotes repeated parameters similar to kwargs in
+python. It passes a variable length argument list. Equivalent to Array[String]
+
+- to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
+
 - `zipWithIndex` should be very useful.
 
 - `Pure OO`  Everything is an object :)
