@@ -60,6 +60,11 @@ pattern matches.
 - `@unchecked` - annotation in the selector expression of pattern matching
 suppresses exhaustive pattern checking for the patterns that follow.
 
+- generic types have default non-variant (or rigid) sub-typing.
+
+- `Queue[+T]` co-variant - if T is sub-type of S then Queue[T] is a sub-type of Queue[S]
+- `Queue[-T]` contra-variant - if T is sub-type of S then Queue[S] is a sub-type of Queue[T]
+
 ## Traits
 - thick interfaces
 - contains:
