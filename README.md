@@ -65,6 +65,14 @@ suppresses exhaustive pattern checking for the patterns that follow.
 - `Queue[+T]` co-variant - if T is sub-type of S then Queue[T] is a sub-type of Queue[S]
 - `Queue[-T]` contra-variant - if T is sub-type of S then Queue[S] is a sub-type of Queue[T]
 
+- Lower bounding type parameter of methods can help making classes completely co-variant
+
+	```scala
+	class Queue[+T](private val leading: List[T], private val trailing: List[T]) {
+		def append[U >: T](x: U) = new Queue[U](leading, x :: trailing) //...
+	}
+	```
+
 ## Traits
 - thick interfaces
 - contains:
