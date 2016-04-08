@@ -13,6 +13,17 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 
 - to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
 
+- different ways to create a list:
+
+	```scala
+	val x = 1 :: 2 :: 3 :: Nil
+	val x = List(1,2,3)
+	val x = List.range(1, 10)
+	val x = List.range(0, 10, 2)
+	val x = List.fill(3)("foo")
+	val x = List.tabulate(5)(n => n * n)
+	```
+	
 - `zipWithIndex` should be very useful.
 
 - `Pure OO`  Everything is an object :)
