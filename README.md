@@ -18,17 +18,21 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 	```scala
 	val x = 1 :: 2 :: 3 :: Nil
 	val x = List(1,2,3)
-	val x = List.range(1, 10)
+	val x = List.range(1, 10) 	//end exclusive
 	val x = List.range(0, 10, 2)
 	val x = List.fill(3)("foo")
 	val x = List.tabulate(5)(n => n * n)
 	```
-	
+
 - `zipWithIndex` should be very useful.
 
 - `Pure OO`  Everything is an object :)
 
-- Scala supports Rank-1 polymorphism
+- `require(denom != 0)` is really cool construct that puts a condition on the
+arguments of a class or method definition.
+
+- Scala supports Rank-1 polymorphism. That means generic functions cannot take
+generic functions as arguments.
 
 - `abstract override` in traits for stackable modifications.
 
@@ -81,6 +85,41 @@ suppresses exhaustive pattern checking for the patterns that follow.
 	```scala
 	class Queue[+T](private val leading: List[T], private val trailing: List[T]) {
 		def append[U >: T](x: U) = new Queue[U](leading, x :: trailing) //...
+	}
+	```
+
+## Abstract Members
+- abstract fields in scala include: types, vals, vars, and methods.
+
+	```scala
+	trait Abstract {
+		type T
+		def transform(x:T): T
+		val initial: T
+		var curr: T
+	}
+
+	class Concrete extends Abstract {
+		type T = String
+		def transform(x: String) = x + x
+	}
+	```
+
+- abstract type in scala is always member of some class or trait, such as `type T` in `Abstract`.
+
+- abstact vals can only be implemented as concrete vals, but abstracts defs can
+be implemented as concrete defs or vals.
+
+- abstract vars come with implicit getters and setters.
+	```scala
+	trait AbstractTime {
+		var hour: Int
+	}
+
+	// same as above
+	trait AbstractTime {
+		def hour: Int
+		def hour_ = (x: Int)
 	}
 	```
 
