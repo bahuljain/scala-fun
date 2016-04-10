@@ -183,5 +183,24 @@ streams
 a certain type and de-structures it into a sequence of extracted values, where
 the length of that sequence is unknown at compile time.
 
+	```scala
+	object Names {
+		def unapplySeq(input: String): Option[Seq[String]] = {
+			val names = input.split(" ")
+			if (names.forall(_.isEmpty())) None
+			else Some(names)
+		}
+	}
+
+	object SequenceExtractor extends App {
+		val names: String = "Bahul Zappos Stripe Nivea"
+
+		names match {
+			case Names(first, _*) => println(first)
+			case _ => println("Nothing")
+		}
+	}
+	```
+
 - `def unapplySeq(object: S): Option[(T1, .., Tn-1, Seq[T])` is an extractor that
 combines fixed and variable parameter extraction
