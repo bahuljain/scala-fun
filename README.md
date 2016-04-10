@@ -34,7 +34,7 @@ arguments of a class or method definition.
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
 
-- `abstract override` in traits for stackable modifications.
+## Pattern Matching
 
 - types in patterns allowed (typed patterns) (wow).
 
@@ -74,6 +74,8 @@ pattern matches.
 
 - `@unchecked` - annotation in the selector expression of pattern matching
 suppresses exhaustive pattern checking for the patterns that follow.
+
+## Type Parameterization
 
 - generic types have default non-variant (or rigid) sub-typing.
 
@@ -133,6 +135,7 @@ be implemented as concrete defs or vals.
 - stackable modifications (tricky):
 	- super classes are stacked in a linear order
 	- rightmost, trait is called first, followed by traits inherited to the left of it.
+	- `abstract override` in traits for stackable modifications.
 
 #### Tips
 - if the behavior will not be reused, then make it a concrete class
@@ -140,3 +143,48 @@ be implemented as concrete defs or vals.
 - if it might be reused in multiple, unrelated classes, make it a trait. Only traits can be mixed into different parts of the class hierarchy.
 - for performance abstract classes are better
 - if you don't know anything, start with traits as they provide more flexibility and can be easily changed later on.
+
+## Factory Method and Extractor
+
+- `def unapply(object: S): Option[(T1, ..., Tn)]` extractor for multiple values.
+
+```scala
+class User(val name: String, val age: Int)
+
+object User {
+	// factory method
+	def apply(name: String, age: Int): User = new User(name, age)
+
+	// extractor method
+	def unapply(user: User): Option[(String, Int)] = Some(user.name, user.age)
+}
+
+object UserTest extends App {
+	// factory method called here.
+	val person: User = User("bahul", 23)
+
+	// unapply method called here.
+	val User(name, age) = person
+	val n User a = person
+
+	println(name + " : " + age)
+	println(n + " : " + age)
+}
+```
+
+- with case classes extractors come for free.
+
+- `def unapply(object: S): Boolean` is a boolean extractor. When used in a
+pattern, the pattern will match if the extractor returns true. Otherwise the
+next case, if available, is tried.
+
+- `x :: xs` or `x #:: xs` or `name User age` Scala also allows extractors to be
+used in an infix notation, although it seems more appropriate for lists and
+streams
+
+- `def unapplySeq(object: S): Option[Seq[T]]` is an extractor takes an object of
+a certain type and de-structures it into a sequence of extracted values, where
+the length of that sequence is unknown at compile time.
+
+- `def unapplySeq(object: S): Option[(T1, .., Tn-1, Seq[T])` is an extractor that
+combines fixed and variable parameter extraction
