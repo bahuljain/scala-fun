@@ -1,6 +1,17 @@
-# Scala Fun
+	# Scala Fun
 
 Learning Scala
+
+- `mkString(sep)` is a similar to join in python. Loved that feature in python.
+
+- `" " * 3` replicates the string 3 times. Very very awesome and useful.
+
+- `s"1 + 1 = ${1 + 1}"` is a really cool string interpolation technique.
+
+- `def echo(args: String*)` denotes repeated parameters similar to kwargs in
+python. It passes a variable length argument list. Equivalent to Array[String]
+
+- to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
 
 - `flatmap` is a complete genius.
 
@@ -18,15 +29,6 @@ Learning Scala
 		case (w, f) if f > 3 => w
 	})
 	```
-
-- `mkString(sep)` is a similar to join in python. Loved that feature in python.
-
-- `" " * 3` replicates the string 3 times. Very very awesome and useful.
-
-- `def echo(args: String*)` denotes repeated parameters similar to kwargs in
-python. It passes a variable length argument list. Equivalent to Array[String]
-
-- to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
 
 - different ways to create a list:
 
