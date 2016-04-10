@@ -4,6 +4,22 @@ Learning Scala
 
 - `flatmap` is a complete genius.
 
+- Partial Functions
+	- unary function defined only on specific inputs.
+	- can be really concise and helpful at times.
+	- combination of map and filter on lists.
+	- provide means to be chained, allowing for a neat functional alternative to the [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) from OOP.
+
+	```scala
+	val wordFrequencies = ("habitual", 6) :: ("and", 56) :: ("consuetudinary", 2) ::
+		("additionally", 27) :: ("homely", 5) :: ("society", 13) :: Nil
+
+	println(wordFrequencies.collect {
+		case (w, f) if f > 3 => w
+	})
+	```
+- `Option` type is also another beauty. Workaround for NullPointerException in Java.
+
 - `mkString(sep)` is a similar to join in python. Loved that feature in python.
 
 - `" " * 3` replicates the string 3 times. Very very awesome and useful.
@@ -41,6 +57,23 @@ generic functions as arguments.
 	```scala
 	case x : List[Any] =>
 	case y : Any =>
+	```
+
+- patterns in value definitions.
+
+	```scala
+	val person: User = User("bahul", 23)
+	val User(name, age) = person
+	```
+
+- really cool way of pattern matching in for comprehensions.
+
+	```scala
+	val lists = List(1, 2, 3) :: List.empty :: List(5, 3) :: Nil
+
+	for {
+		list @ head :: _ <- lists
+	} yield list.size
 	```
 
 - variables enclosed in back ticks allows them to be used as constant patterns in
