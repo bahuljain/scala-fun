@@ -166,9 +166,6 @@ object UserTest extends App {
 	// unapply method called here.
 	val User(name, age) = person
 	val n User a = person
-
-	println(name + " : " + age)
-	println(n + " : " + age)
 }
 ```
 
