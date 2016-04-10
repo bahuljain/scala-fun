@@ -18,7 +18,6 @@ Learning Scala
 		case (w, f) if f > 3 => w
 	})
 	```
-- `Option` type is also another beauty. Workaround for NullPointerException in Java.
 
 - `mkString(sep)` is a similar to join in python. Loved that feature in python.
 
@@ -49,6 +48,32 @@ arguments of a class or method definition.
 
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
+
+## Option Type
+
+- `Option` type is also another beauty. Workaround for NullPointerException in Java.
+
+- `isDefined` returns true if the Option type is of instance Some else false.
+
+- `getOrElse` is B-E-A-utiful. Easiest way to deal with Option types.
+
+	```scala
+	val x = Some(5)
+	x.getOrElse(0) // 0 being the default value if None is obtained from x.
+	```
+
+- Option types can be viewed as collection.
+
+- `flatmap` on Option type transforms `Some(Some(Some(5)))` to `Some(5)`
+
+	```scala
+	val names: List[Option[String]] = List(Some("Johanna"), None, Some("Daniel"))
+	names.map(_.map(_.toUpperCase)) // List(Some("JOHANNA"), None, Some("DANIEL"))
+	names.flatMap(xs => xs.map(_.toUpperCase)) // List("JOHANNA", "DANIEL")
+	```
+
+- basically you can do all functional operations that are provided for lists or
+sets on Option Types as well, for e.g. map, filter, flatten etc.
 
 ## Pattern Matching
 
