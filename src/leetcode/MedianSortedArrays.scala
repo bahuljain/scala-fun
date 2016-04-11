@@ -11,6 +11,7 @@ object MedianSortedArrays extends App {
 		else arr1(l / 2)
 	}
 
+	//	I hope this is correct
 	def median2(A: Array[Int], B: Array[Int]): Double = (A.length, B.length) match {
 		// the smaller array has to remain on the left
 		case (x, y) if x > y => median2(B, A)
