@@ -52,32 +52,6 @@ arguments of a class or method definition.
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
 
-## Option Type
-
-- `Option` type is also another beauty. Workaround for NullPointerException in Java.
-
-- `isDefined` returns true if the Option type is of instance Some else false.
-
-- `getOrElse` is B-E-A-utiful. Easiest way to deal with Option types.
-
-	```scala
-	val x = Some(5)
-	x.getOrElse(0) // 0 being the default value if None is obtained from x.
-	```
-
-- Option types can be viewed as collection.
-
-- `flatmap` on Option type transforms `Some(Some(Some(5)))` to `Some(5)`
-
-	```scala
-	val names: List[Option[String]] = List(Some("Johanna"), None, Some("Daniel"))
-	names.map(_.map(_.toUpperCase)) // List(Some("JOHANNA"), None, Some("DANIEL"))
-	names.flatMap(xs => xs.map(_.toUpperCase)) // List("JOHANNA", "DANIEL")
-	```
-
-- basically you can do all functional operations that are provided for lists or
-sets on Option Types as well, for e.g. map, filter, flatten etc.
-
 ## Pattern Matching
 
 - types in patterns allowed (typed patterns) (wow).
@@ -135,6 +109,66 @@ pattern matches.
 
 - `(x: @unchecked) match { ... }` - annotation in the selector expression of pattern matching
 suppresses exhaustive pattern checking for the patterns that follow.
+
+## Option Type
+
+- `Option` type is also another beauty. Workaround for NullPointerException in Java.
+
+- `isDefined` returns true if the Option type is of instance Some else false.
+
+- `getOrElse` is B-E-A-utiful. Easiest way to deal with Option types.
+
+	```scala
+	val x = Some(5)
+	x.getOrElse(0) // 0 being the default value if None is obtained from x.
+	```
+
+- Option types can be viewed as collection.
+
+- `flatmap` on Option type transforms `Some(Some(Some(5)))` to `Some(5)`
+
+	```scala
+	val names: List[Option[String]] = List(Some("Johanna"), None, Some("Daniel"))
+	names.map(_.map(_.toUpperCase)) // List(Some("JOHANNA"), None, Some("DANIEL"))
+	names.flatMap(xs => xs.map(_.toUpperCase)) // List("JOHANNA", "DANIEL")
+	```
+
+- basically you can do all functional operations that are provided for lists or
+sets on Option Types as well, for e.g. map, filter, flatten etc.
+
+## Error Handling with Try
+
+- clean way to handle exceptions. Enclose block of code that might throw an
+exception in a Try construct. Return type is of instance `Try[A]` that can
+either have a value `Success(A)` or `Failure(exception)`.
+
+	```scala
+	def get(arr: Array[Int], pos: Int): Try[Int] = Try(arr(pos))
+
+	val arr = Array(1, 2, 3, 4, 5, 6, 7)
+	val success = get(arr, 5) // Success(6)
+	val fail = get(arr, -1) // Failure(java.lang.ArrayIndexOutOfBoundsException: -1)
+	```
+
+- Again, like Option Type, this type can also be viewed as a Collection, so all
+map, flatMap, filter, foreach, etc functions can be applied.
+
+- `filter` returns a `Failure` if predicate does not hold true or the original
+value is a Failure else it returns Success.
+
+- using in for comprehensions
+
+	```scala
+	def parseURL(url: String): Try[URL] = Try(new URL(url))
+
+	def getURLContent(url: String): Try[Iterator[String]] =
+		for {
+			url <- parseURL(url)
+			connection <- Try(url.openConnection())
+			is <- Try(connection.getInputStream)
+			source = Source.fromInputStream(is)
+		} yield source.getLines()
+	```
 
 ## Type Parameterization
 
