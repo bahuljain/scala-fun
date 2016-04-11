@@ -6,7 +6,7 @@ Learning Scala
 
 - `" " * 3` replicates the string 3 times. Very very awesome and useful.
 
-- `s"1 + 1 = ${1 + 1}"` is a really cool string interpolation technique.
+- `s"1 + 1 = ${1 + 1}"` is the cool string interpolation technique. Use `f"..."` for type safe interpolation.
 
 - `def echo(args: String*)` denotes repeated parameters similar to kwargs in
 python. It passes a variable length argument list. Equivalent to Array[String]
@@ -132,7 +132,7 @@ in the same file. Important for pattern matching as it restricts the cases
 possible, and helps the compiler give concrete warnings while making erroneous
 pattern matches.
 
-- `@unchecked` - annotation in the selector expression of pattern matching
+- `(x: @unchecked) match { ... }` - annotation in the selector expression of pattern matching
 suppresses exhaustive pattern checking for the patterns that follow.
 
 ## Type Parameterization
