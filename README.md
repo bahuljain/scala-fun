@@ -6,7 +6,8 @@ Learning Scala
 
 - `" " * 3` replicates the string 3 times. Very very awesome and useful.
 
-- `s"1 + 1 = ${1 + 1}"` is the cool string interpolation technique. Use `f"..."` for type safe interpolation.
+- `s"1 + 1 = ${1 + 1}"` is the cool string interpolation technique. Use `f"..."`
+for type safe interpolation.
 
 - `def echo(args: String*)` denotes repeated parameters similar to kwargs in
 python. It passes a variable length argument list. Equivalent to Array[String]
