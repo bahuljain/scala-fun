@@ -1,4 +1,4 @@
-	# Scala Fun
+# Scala Fun
 
 Learning Scala
 
