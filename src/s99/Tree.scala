@@ -8,7 +8,7 @@ case object End extends Tree[Nothing] {
 }
 
 case class Node[T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
-	override def toString = "(" + value.toString + " " + left.toString + " " + right.toString + ")"
+	override def toString = "(" + left.toString + " " + value.toString + " " + right.toString + ")"
 
 	def compare(that: Node[T])(implicit ord: Ordering[T]): Int = ord.compare(this.value, that.value)
 
