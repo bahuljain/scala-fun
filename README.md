@@ -170,6 +170,19 @@ value is a Failure else it returns Success.
 		} yield source.getLines()
 	```
 
+#### Recover
+
+- takes a partial function and returns another Try.
+	- Success -> Success
+	- Failures which partial function handles -> Success
+	- not handled failures -> Failure.
+
+	```scala
+	val value = get(arr, -1) recover {
+		case e: java.lang.ArrayIndexOutOfBoundsException => Int.MinValue
+	}
+	```
+
 ## Type Parameterization
 
 - generic types have default non-variant (or rigid) sub-typing.

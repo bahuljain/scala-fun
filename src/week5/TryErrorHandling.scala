@@ -36,7 +36,7 @@ object TryErrorHandling extends App {
 	try {
 		throwable(-1)
 	} catch {
-		case _ => println("ok")
+		case _: Throwable => println("caught!")
 	}
 
 	def parseURL(url: String): Try[URL] = Try(new URL(url))
@@ -51,5 +51,11 @@ object TryErrorHandling extends App {
 
 	val iterr = getURLContent("http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html")
 
-	iterr.get.foreach { println }
+	//	iterr.get.foreach { println }
+
+	val value = get(arr, -1) recover {
+		case e: java.lang.ArrayIndexOutOfBoundsException => Int.MinValue
+	}
+
+	println(value)
 }
