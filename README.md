@@ -183,6 +183,21 @@ value is a Failure else it returns Success.
 	}
 	```
 
+## Either Type
+
+- `Either[A, B]` instance contains an instance of either `A` in `Left` or `B` in
+`Right`. Here `Left` and `Right` are the two subtypes of `Either` type.
+
+- Used most popularly in error handling and by convention `Left` holds the error
+and `Right` holds the success value.
+
+	```scala
+	def get(arr: Array[Int], pos: Int): Either[String, Int] = {
+		if (pos < 0 || pos >= arr.length) Left("Array Index Out of Bounds.")
+		else Right(arr(pos))
+	}
+	```
+
 ## Type Parameterization
 
 - generic types have default non-variant (or rigid) sub-typing.
