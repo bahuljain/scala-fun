@@ -11,4 +11,17 @@ object EitherType extends App {
 	println(get(arr, 4))
 	println(get(arr, -1))
 
+	val x = get(arr, -1)
+
+	println(x.right)
+
+	println(x.left.map { _.toString() })
+
+	println(x.right.toOption)
+
+	val y = get(arr, 4)
+
+	println(y.fold(_.map { identity }, _.toString()))
+	println(x.fold(_.map { identity }, _.toString()))
+
 }

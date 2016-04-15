@@ -188,6 +188,9 @@ value is a Failure else it returns Success.
 - `Either[A, B]` instance contains an instance of either `A` in `Left` or `B` in
 `Right`. Here `Left` and `Right` are the two subtypes of `Either` type.
 
+- general-purpose type for use whenever you need to deal with situations where the
+result can be of one of two possible types.
+
 - Used most popularly in error handling and by convention `Left` holds the error
 and `Right` holds the success value.
 
@@ -197,6 +200,16 @@ and `Right` holds the success value.
 		else Right(arr(pos))
 	}
 	```
+
+- Need to apply `left` or `right` projection before using map, flatMap and all
+other cool functions.
+
+- `toOption` converts the projection to Option type. The projected value becomes
+`Some` and the other one becomes `None`.
+
+- `fold` is another useful function that takes two functions, one that deals with
+the Left result and other that deals with the Right result both of which return
+result of the same type.
 
 ## Type Parameterization
 
