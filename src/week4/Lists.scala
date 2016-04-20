@@ -34,17 +34,16 @@ object Lists extends App {
 
 		if (mid == 0) xs
 		else {
-
 			def merge(xs: List[T], ys: List[T]): List[T] = (xs, ys) match {
 				case (xs, Nil) => xs
 				case (Nil, ys) => ys
-				case (x :: xs1, y :: ys1) =>
-					if (ord.lt(x, y)) x :: merge(xs1, ys)
-					else y :: merge(xs, ys1)
+				case (x :: xtail, y :: ytail) =>
+					if (ord.lt(x, y)) x :: merge(xtail, ys)
+					else y :: merge(xs, ytail)
 			}
 
-			val (fst, snd): (List[T], List[T]) = xs.splitAt(mid)
-			merge(msort(fst), msort(snd))
+			val (left, right): (List[T], List[T]) = xs.splitAt(mid)
+			merge(msort(left), msort(right))
 		}
 	}
 

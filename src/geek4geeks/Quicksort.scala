@@ -5,10 +5,10 @@ object Quicksort extends App {
 		case Nil => Nil
 		case _ =>
 			val pivot = list.head
-			val (left, right) = list.tail.partition(ord.lt(_, pivot))
-			quicksort(left) ++ (pivot :: quicksort(right))
+			val (eq, neq) = list partition { _ == pivot }
+			val (left, right) = neq partition { ord.lt(_, pivot) }
+			quicksort(left) ++ (eq ++ quicksort(right))
 	}
 
 	println(quicksort(List(4, 2, 6, 8, 7, 6, 6, 7, 5)))
-
 }

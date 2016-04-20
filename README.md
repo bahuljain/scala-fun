@@ -340,3 +340,25 @@ the length of that sequence is unknown at compile time.
 
 - `def unapplySeq(object: S): Option[(T1, .., Tn-1, Seq[T])` is an extractor that
 combines fixed and variable parameter extraction
+
+## Futures and Promises
+
+- beats callback system of Node.js like a pro.
+
+- `Future[T]`
+	- container of computation that eventually results to a type `T`.
+	- If computation fails or does not complete, it holds an exception.
+	- read-only interface. write-once.
+	- used to encapsulate operations that need to computed concurrently in a non-blocking way.
+	- assigns a new thread to the computation in a Future container.
+
+
+	```scala
+	def grind(beans: CoffeeBeans): Future[GroundCoffee] = Future {
+	  println("start grinding...")
+	  Thread.sleep(Random.nextInt(2000))
+	  if (beans == "baked beans") throw GrindingException("are you joking?")
+	  println("finished grinding...")
+	  s"ground coffee of $beans"
+	}
+	```
