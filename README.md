@@ -16,7 +16,7 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 
 - `flatmap` is a complete genius.
 
-- Partial Functions
+- [Partial Functions](src/week5/PartialFunctions.scala)
 	- unary function defined only on specific inputs.
 	- can be really concise and helpful at times.
 	- combination of map and filter on lists.
@@ -110,7 +110,7 @@ pattern matches.
 - `(x: @unchecked) match { ... }` - annotation in the selector expression of pattern matching
 suppresses exhaustive pattern checking for the patterns that follow.
 
-## Option Type
+## [Option Type](src/week5/OptionType.scala)
 
 - `Option` type is also another beauty. Workaround for NullPointerException in Java.
 
@@ -136,7 +136,7 @@ suppresses exhaustive pattern checking for the patterns that follow.
 - basically you can do all functional operations that are provided for lists or
 sets on Option Types as well, for e.g. map, filter, flatten etc.
 
-## Error Handling with Try
+## Error Handling with [Try](/src/week5/TryErrorHandling.scala)
 
 - clean way to handle exceptions. Enclose block of code that might throw an
 exception in a Try construct. Return type is of instance `Try[A]` that can
@@ -183,7 +183,7 @@ value is a Failure else it returns Success.
 	}
 	```
 
-## Either Type
+## [Either Type](/src/week5/OptionType.scala)
 
 - `Either[A, B]` instance contains an instance of either `A` in `Left` or `B` in
 `Right`. Here `Left` and `Right` are the two subtypes of `Either` type.
@@ -361,4 +361,18 @@ combines fixed and variable parameter extraction
 	  println("finished grinding...")
 	  s"ground coffee of $beans"
 	}
+	```
+
+- `Promise`
+	- Companion type that allows you to complete a `Future` by putting a value into it.
+	- you can complete a promised with either a `Success` or a `Failure`.
+
+	```scala
+	val p = Promise[TaxCut]()
+
+	// Successful promise
+	p.success(TaxCut(20))
+
+	// Failed promise
+	p.failure(LameExcuse("global economy crisis"))
 	```
