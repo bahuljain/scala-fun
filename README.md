@@ -341,7 +341,7 @@ the length of that sequence is unknown at compile time.
 - `def unapplySeq(object: S): Option[(T1, .., Tn-1, Seq[T])` is an extractor that
 combines fixed and variable parameter extraction
 
-## Futures and Promises
+## [Futures](/src/week5/FutureType.scala) and Promises
 
 - beats callback system of Node.js like a pro.
 
