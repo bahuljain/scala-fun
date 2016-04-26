@@ -23,21 +23,20 @@ object ExcelColumns extends App {
 		new_type
 	}
 
-	var start = System.nanoTime()
+	var start = System.nanoTime
 	for (i <- (0 to 10)) {
 		excelColumn
 	}
-	println("Method 1", System.nanoTime() - start)
+	println("Method 1", System.nanoTime - start)
 
 	var typ = ""
 	def get_new_type = {
 		def next(str: String): String = {
 			def aux(str: List[Char], acc: List[Char], carry: Boolean): String = str match {
-				case Nil => (if (carry) 'A' :: acc else acc).mkString
-				case x :: xs =>
-					if (!carry) aux(xs, x :: acc, false)
-					else if (x == 'Z') aux(xs, 'A' :: acc, true)
-					else aux(xs, (x + 1).toChar :: acc, false)
+				case Nil => (if (carry) 'A' :: acc else acc) mkString
+				case x :: xs if (!carry) => aux(xs, x :: acc, false)
+				case 'Z' :: xs if (carry) => aux(xs, 'A' :: acc, true)
+				case x :: xs => aux(xs, (x + 1).toChar :: acc, false)
 			}
 			aux(str.toList.reverse, Nil, true)
 		}
@@ -45,11 +44,12 @@ object ExcelColumns extends App {
 		typ
 	}
 
-	start = System.nanoTime()
+	start = System nanoTime
+
 	for (i <- (0 to 10)) {
 		get_new_type
 	}
-	println("Method 2", System.nanoTime() - start)
+	println("Method 2", System.nanoTime - start)
 
 	val alphabets = 'A' to 'Z'
 	var n = 0
@@ -65,11 +65,12 @@ object ExcelColumns extends App {
 		next mkString
 	}
 
-	start = System.nanoTime()
+	start = System nanoTime
+
 	for (i <- (0 to 10)) {
 		get_new_typ
 	}
 
-	println("Method 3", System.nanoTime() - start)
+	println("Method 3", System.nanoTime - start)
 
 }

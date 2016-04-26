@@ -366,6 +366,8 @@ combines fixed and variable parameter extraction
 - `Promise`
 	- Companion type that allows you to complete a `Future` by putting a value into it.
 	- you can complete a promised with either a `Success` or a `Failure`.
+	- To complete a `Promise` with a success, you call its success method, passing
+	it the value that the `Future` associated with it is supposed to have.
 
 	```scala
 	val p = Promise[TaxCut]()
