@@ -7,6 +7,10 @@ object ReverseVowels extends App {
 
 	val vowels = Set('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U')
 
+	/* Method 1 :
+	 * - Filter out the vowels, reverse them and store separately
+	 * - map the vowels in the original list with the vowels from reversed list
+	*/
 	def reverseVowels(str: String): String = {
 		@tailrec
 		def partialMap(str: List[Char], map: String, acc: List[Char]): String =
@@ -15,9 +19,14 @@ object ReverseVowels extends App {
 				case x :: xs if (vowels.contains(x)) => partialMap(xs, map.tail, map.head :: acc)
 				case x :: xs => partialMap(xs, map, x :: acc)
 			}
-		partialMap(str toList, str.filter(vowels.contains(_)).reverse, Nil)
+		partialMap(str.toList, str.filter(vowels.contains(_)).reverse, Nil)
 	}
 
+	/* Method 2 : A very cute code :)
+	 * - filter out vowels along with their indices and store separately
+	 * - keep the indices fixed but reverse vowels to form a map that shows the new positions of vowels
+	 * - apply replacements
+	 */
 	def reverseVowels2(str: String): String = {
 		val (v, i) = str.zipWithIndex.filter(vowels contains _._1) unzip
 		val replacements: Map[Int, Char] = (i zip v.reverse)(breakOut)
