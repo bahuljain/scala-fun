@@ -16,21 +16,6 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 
 - `flatmap` is a complete genius.
 
-- [Partial Functions](src/week5/PartialFunctions.scala)
-	- unary function defined only on specific inputs.
-	- can be really concise and helpful at times.
-	- combination of map and filter on lists.
-	- provide means to be chained, allowing for a neat functional alternative to the [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) from OOP.
-
-	```scala
-	val wordFrequencies = ("habitual", 6) :: ("and", 56) :: ("consuetudinary", 2) ::
-		("additionally", 27) :: ("homely", 5) :: ("society", 13) :: Nil
-
-	println(wordFrequencies.collect {
-		case (w, f) if f > 3 => w
-	})
-	```
-
 - different ways to create a list:
 
 	```scala
@@ -55,7 +40,7 @@ arguments of a class or method definition.
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
 
-## Function Composition
+## [Function Composition](src/week3/FunctionChaining.scala)
 
 - `f compose g` returns a function that first applies `g` on the argument and then
 applies function `f` to the result of that.
@@ -73,6 +58,33 @@ can use `Function.chain()` and pass the sequence of functions to it. **coolest s
   	removeInappropriateLanguage,
   	addAdvertismentToFooter))
 	```
+
+## [Partially Defined Functions](src/week5/PartialFunctions.scala)
+
+- defined only on specific inputs; really concise and helpful at times.
+
+- combination of map and filter on lists.
+
+	```scala
+	val wordFrequencies = ("habitual", 6) :: ("and", 56) :: ("consuetudinary", 2) ::
+		("additionally", 27) :: ("homely", 5) :: ("society", 13) :: Nil
+
+	println(wordFrequencies.collect {
+		case (w, f) if f > 3 => w
+	})
+	```
+
+- provide means to be chained, allowing for a neat functional alternative to the [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) from OOP.
+
+- `fooHandler orElse barHandler orElse bazHandler` is a chain of partial
+functions that passes on control to the next function if the current one is not
+defined on a particular input.
+
+- `pf.lift` converts a partial function to a normal function that returns
+`Some[A]` for inputs that are defined by the partial function and a `None`
+otherwise.
+
+- `Function.unlift(f)` converts a function that returns an `Option` to a partial function.
 
 ## Pattern Matching
 
