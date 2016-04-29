@@ -46,11 +46,33 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 
 - `Pure OO`  Everything is an object :)
 
+- to create a copy of an object with some changes in initialization of constructor
+parameters use `obj.copy(arg = something)`
+
 - `require(denom != 0)` is really cool construct that puts a condition on the
 arguments of a class or method definition.
 
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
+
+## Function Composition
+
+- `f compose g` returns a function that first applies `g` on the argument and then
+applies function `f` to the result of that.
+
+- `f andThen g` returns a function that first applies `f` on the argument and then
+applies function `g` to the result of that.
+
+- to chain multiple functions that just transform data without changing type we
+can use `Function.chain()` and pass the sequence of functions to it. **coolest shit ever**
+
+	```scala
+	val pipeline = Function.chain(Seq(
+  	addMissingSubject,
+  	checkSpelling,
+  	removeInappropriateLanguage,
+  	addAdvertismentToFooter))
+	```
 
 ## Pattern Matching
 
