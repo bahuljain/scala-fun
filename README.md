@@ -14,6 +14,12 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 
 - to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
 
+- `fn.curried` converts a multiple parameter function to a curried function. The
+reverse of that is `Function.uncurried(fn)`.
+
+- `add(_: Int, 10): Int` is a partially applied function, that returns a function
+that takes and Int and returns an Int.
+
 - `flatmap` is a complete genius.
 
 - different ways to create a list:
@@ -40,7 +46,7 @@ arguments of a class or method definition.
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
 
-## [Function Composition](src/week3/FunctionChaining.scala)
+## [Function Composition](src/week2/FunctionChaining.scala)
 
 - `f compose g` returns a function that first applies `g` on the argument and then
 applies function `f` to the result of that.
@@ -56,7 +62,8 @@ can use `Function.chain()` and pass the sequence of functions to it. **coolest s
   	addMissingSubject,
   	checkSpelling,
   	removeInappropriateLanguage,
-  	addAdvertismentToFooter))
+  	addAdvertismentToFooter
+	))
 	```
 
 ## [Partially Defined Functions](src/week5/PartialFunctions.scala)
@@ -259,6 +266,11 @@ result of the same type.
 		def append[U >: T](x: U) = new Queue[U](leading, x :: trailing) //...
 	}
 	```
+
+## Type Classes
+
+- ad hoc and retroactive polymorphism
+
 
 ## Abstract Members
 - abstract fields in scala include: types, vals, vars, and methods.
