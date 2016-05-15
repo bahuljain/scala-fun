@@ -31,7 +31,7 @@ class JSJS {
 		 * then stored in a file called 'jsjs.log'.
 		 */
 		val compilationProcess = Process(s"echo $code") #|
-			Process("./jsjs.out", new File(jsjsPath)) #>
+			Process("./jsjs.out -s", new File(jsjsPath)) #>
 			(new File("jsjs.log"))
 
 		/*  Status Codes:

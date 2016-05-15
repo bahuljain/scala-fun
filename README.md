@@ -6,6 +6,15 @@ Learning Scala
 
 - `" " * 3` replicates the string 3 times. Very very awesome and useful.
 
+- the awesome multiline feature, with formatting options. Also no need to escape
+single and double quotes.
+
+	```scala
+	val s = """This is known as a
+	|"multiline" string
+	| or 'heredoc' syntax.""" stripMargin
+	```
+
 - `s"1 + 1 = ${1 + 1}"` is the cool string interpolation technique. Use `f"..."`
 for type safe interpolation.
 
@@ -13,6 +22,8 @@ for type safe interpolation.
 python. It passes a variable length argument list. Equivalent to Array[String]
 
 - to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
+
+- `@tailrec` annotation gives warning at compile time if the function is not tail recursive.
 
 - `fn.curried` converts a multiple parameter function to a curried function. The
 reverse of that is `Function.uncurried(fn)`.
@@ -151,6 +162,10 @@ pattern matches.
 - `(x: @unchecked) match { ... }` - annotation in the selector expression of pattern matching
 suppresses exhaustive pattern checking for the patterns that follow.
 
+- `(x: @switch) match { ... }` - annotation provides a warning if the match
+expression cannot be compiled down to a `tableswitch` or a `lookupswitch` for
+faster performance.
+
 ## [Option Type](src/week5/OptionType.scala)
 
 - `Option` type is also another beauty. Workaround for NullPointerException in Java.
@@ -267,10 +282,41 @@ result of the same type.
 	}
 	```
 
-## Type Classes
+## [Type Classes](/src/week3/TypeClasses.scala)
 
 - ad hoc and retroactive polymorphism
 
+- creating a type class
+	```scala
+	trait NumberLike[T] {
+		def plus(x: T, y: T): T
+		def divide(x: T, y: Int): T
+		def minus(x: T, y: T): T
+	}
+	```
+- members of type classes are usually singleton objects. They can be created by
+extending the type class.
+
+- type class members become implicitly available by using the `implicit` keyword
+before each of the type class implementation.
+
+	```scala
+	object NumberLike {
+		implicit object NumberLikeDouble extends NumberLike[Double] { ... }
+		implicit object NumberLikeInt extends NumberLike[Int] { ... }
+	}
+	```
+
+- coding up against type classes:
+	```scala
+	def mean[T](xs: Vector[T])(implicit ev: NumberLike[Double]): T = { ... }
+	```
+
+- the `implicit` second parameter in the above definition constrains the parameter types
+to a specific type class.
+
+- `@implicitNotFound` can be used to customize the error message obtain when no
+implicit value is found.
 
 ## Abstract Members
 - abstract fields in scala include: types, vals, vars, and methods.
