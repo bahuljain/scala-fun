@@ -284,7 +284,7 @@ result of the same type.
 
 ## [Type Classes](/src/week3/TypeClasses.scala)
 
-- ad hoc and retroactive polymorphism
+- ad-hoc (method overloading) and retroactive polymorphism
 
 - creating a type class
 	```scala
@@ -318,7 +318,10 @@ to a specific type class.
 - `@implicitNotFound` can be used to customize the error message obtain when no
 implicit value is found.
 
-## Abstract Members
+- a nested type is bound to a specific instance of the outer type, not the outer
+type itself. see [path-dependent types](src/week3/PathDependentTypes.scala)...
+
+## [Abstract Members](src/week3/Abstract.scala)
 - abstract fields in scala include: types, vals, vars, and methods.
 
 	```scala
