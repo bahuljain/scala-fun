@@ -473,3 +473,33 @@ combines fixed and variable parameter extraction
 	// Failed promise
 	p.failure(LameExcuse("global economy crisis"))
 	```
+
+## SBT
+
+- build tool for scala applications
+
+- dependency management handled by **Apache Ivy**, therefore all Java projects
+created for Maven are also available with SBT.
+
+- those that aren't on Ivy/Maven can be simply placed in the project's `lib`
+folder, and SBT will automatically find them.
+
+- use `sbtmkdirs` script or `Giter8` to create new project.
+
+- `sbt compile` to compile the project. `~ compile` to auto-recompile when
+source code changed.
+
+- `sbt run` to run the project.
+
+- `sbt package` to package your project as a JAR file.
+
+- `jar tvf target/scala-x/basic_x-1.0.jar` to list contents of JAR.
+
+- `scala tvf target/scala-x/basic_x-1.0.jar` to execute `main` using scala
+interpreter.
+
+- `doc` generates API documentation from Scala source code using `scaladoc`.
+
+- `package-doc` creates JAR with docs.
+
+- `update` updates external dependencies
