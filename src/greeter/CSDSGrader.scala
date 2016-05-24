@@ -1,43 +1,45 @@
 package greeter
 
 object CSDSGrader extends App {
-	val path = "/home/bahuljain/Documents/Columbia/CSDS/finalscores.csv"
+	val path = "/home/bahuljain/Downloads/CSDS-Submission/scores.csv"
 
 	val data = io
 		.Source
 		.fromFile(path)
-		.getLines()
+		.getLines
 		.toList
-		.map(_.split(","))
-		.map { case e => (e(0), e(1), e(2).trim.toDouble) }
-		.sortBy(_._3)
-		.reverse
+		.map(_ split ",")
+		.map {
+			case Array(a, b, c, d, e, f, g, h, i, j, k, l) => (
+				a, b, (c.toDouble + d.toDouble) / 2, e, f, g, (h.toDouble + k.toDouble) / 2, i, j, l,
+				(c.toDouble + d.toDouble) / 4 +
+				e.toDouble / 10 +
+				f.toDouble / 10 +
+				g.toDouble / 10 +
+				(h.toDouble + k.toDouble) / 200 * 15 +
+				i.toDouble / 2 +
+				j.toDouble / 100 * 15 +
+				l.toDouble / 16 * 30)
+		}
 
-	val totalStudents = data.length.toDouble
+	val sorted = data sortBy (_ _11) reverse
 
-	val (aPlus, rest) = data.splitAt(8)
-	val (a, axs) = rest.splitAt((0.6 * totalStudents).toInt)
-	val (aMinus, bPlus) = axs partition { _._3 > 80 }
+	val totalStudents = sorted.length.toDouble
 
-	//	val APlus = data filter { _._3 >= 97 }
+	val (aPlus, rest) = sorted partition (_._11 > 97.5)
+	val (a, axs) = rest splitAt ((0.6 * totalStudents) toInt)
+	val (aMinus, bPlus) = axs partition (_._11 > 80)
 
-	//	val A = data filter { case e => e._3 < 97 && e._3 >= 85 }
+	//	println(aPlus.mkString("\n") + "\n")
+	//	println(a.mkString("\n") + "\n")
+	//	println(aMinus.mkString("\n") + "\n")
+	//	println(bPlus.mkString("\n") + "\n")
 
-	//	val AMinus = data filter { case e => e._3 < 85 && e._3 >= 75 }
+	//	val graded = sorted map {
+	//		case (name, uni, score) => s"$name,$uni,$score"
+	//	}
 
-	//	val BPlus = data filter { _._3 < 75 }
+	val text = sorted mkString "\n"
 
-	println(aPlus.mkString("\n"))
-	println()
-	println(a.mkString("\n"))
-	println()
-	println(aMinus.mkString("\n"))
-	println()
-	println(bPlus.mkString("\n"))
-
-	/*println(aPlus.length / totalStudents)
-	println(a.length / totalStudents)
-	println(aMinus.length / totalStudents)
-	println(bPlus.length / totalStudents)*/
-
+	println(text split "\n" map (_ stripPrefix "(" stripSuffix ")") mkString "\n")
 }

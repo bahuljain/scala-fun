@@ -25,12 +25,12 @@ object ERGrader extends App {
 	val path = "/home/bahuljain/Desktop/ER_Instabase.csv"
 
 	def getScores(path: String): List[String] =
-		io.Source.fromFile(path).getLines().toList
+		io.Source.fromFile(path).getLines.toList
 
-	def processing(lines: List[String]) /*: List[(String, Double)] */ = lines.tail
-		.map { _.split(',') }
-		.filterNot { _.length == 1 }
-		.map { case e => (e(0), e(1).trim.toDouble) }
+	def processing(lines: List[String]) /*: List[(String, Double)] */ =
+		lines.tail map (_ split ',') filterNot (_.length == 1) map {
+			case e => (e(0), e(1).trim.toDouble)
+		}
 
 	val scores = processing(getScores(path))
 
@@ -47,9 +47,11 @@ object ERGrader extends App {
 	//	val min = scores1.minBy(_._2)._2
 	//	val max = scores1.maxBy(_._2)._2
 
-	val scaledScores = scores1
-		.map { case e => (e._1, (e._2 - 90) / (10) * 20 + 10) }
-		.map { case e => s"${e._1},${e._2}" }
+	val scaledScores = scores1 map {
+		case e => (e._1, (e._2 - 90) / (10) * 20 + 10)
+	} map {
+		case e => s"${e._1},${e._2}"
+	}
 
 	scaledScores foreach println
 

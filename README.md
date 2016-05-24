@@ -57,6 +57,9 @@ arguments of a class or method definition.
 - Scala supports Rank-1 polymorphism. That means generic functions cannot take
 generic functions as arguments.
 
+- for-comprehension translates to a composition of `flatMap`, `withFilter` and
+`map`
+
 ## [Function Composition](src/week2/FunctionChaining.scala)
 
 - `f compose g` returns a function that first applies `g` on the argument and then
@@ -79,7 +82,9 @@ can use `Function.chain()` and pass the sequence of functions to it. **coolest s
 
 ## [Partially Defined Functions](src/week5/PartialFunctions.scala)
 
-- defined only on specific inputs; really concise and helpful at times.
+- defined only on specific inputs; really concise and helpful at times. Use the
+`isDefinedAt` method to check if a partial function is defined for a particular
+input.
 
 - combination of map and filter on lists.
 
@@ -106,21 +111,21 @@ otherwise.
 
 ## Pattern Matching
 
-- types in patterns allowed (typed patterns) (wow).
+- **Typed Patterns**: types in patterns allowed (wow).
 
 	```scala
 	case x : List[Any] =>
 	case y : Any =>
 	```
 
-- patterns in value definitions.
+- **Patterns in value definitions**.
 
 	```scala
 	val person: User = User("bahul", 23)
 	val User(name, age) = person
 	```
 
-- really cool way of pattern matching in for comprehensions.
+- **Patterns in for-comprehensions**.
 
 	```scala
 	val lists = List(1, 2, 3) :: List.empty :: List(5, 3) :: Nil
