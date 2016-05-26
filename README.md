@@ -23,13 +23,14 @@ python. It passes a variable length argument list. Equivalent to Array[String]
 
 - to pass an array as a repeated parameter append by `: _*` like `echo(arr: _*)`
 
-- `@tailrec` annotation gives warning at compile time if the function is not tail recursive.
+- `@tailrec` annotation gives warning at compile time if the function is not
+tail recursive.
 
 - `fn.curried` converts a multiple parameter function to a curried function. The
 reverse of that is `Function.uncurried(fn)`.
 
-- `add(_: Int, 10): Int` is a partially applied function, that returns a function
-that takes and Int and returns an Int.
+- `add(_: Int, 10): Int` is a **partially applied function**, that returns a function
+that takes an Int and returns an Int. Somewhat similar to currying..
 
 - `flatmap` is a complete genius.
 
@@ -58,7 +59,7 @@ arguments of a class or method definition.
 generic functions as arguments.
 
 - for-comprehension translates to a composition of `flatMap`, `withFilter` and
-`map`
+`map	`
 
 ## [Function Composition](src/week2/FunctionChaining.scala)
 
@@ -508,3 +509,34 @@ interpreter.
 - `package-doc` creates JAR with docs.
 
 - `update` updates external dependencies
+
+## Monads
+
+- the class of data structures on which functions such as `map` and `flatMap`
+can be applied to are called **monads**.
+
+- monad M is a parametric type `M[T]` with `flatMap` and `unit` operations.
+
+	```scala
+	trait M[T] {
+		def flatMap[U](f: T => M[U]): M[U]
+	}
+
+	def unit[T](x: T): M[T]
+	```
+
+- `unit` functions for some common monads:
+
+	1. **List**:  unit(x) ==> List(x)
+	1. **Set**:  unit(x) ==> Set(x)
+	1. **Option**:  unit(x) ==> Some(x)
+	1. **Generator**:  unit(x) ==> single(x)
+
+### Monad Laws
+
+1. Associativity: `m flatMap f flatMap g == m flatMap (x => f(x) flatMap g)`
+2. Left Unit: `unit(x) flatMap f == f(x)`
+3. Right Unit: `m flatMap unit == m`
+
+- `Try` is not monad since left unit law fails. `Try(expr) flatMap f != f(expr)`
+since left-hand side never raises a fatal exception but the right hand side can.
