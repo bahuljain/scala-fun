@@ -35,7 +35,7 @@ object Day2 extends App {
 		}
 	}
 
-	val lines = scala.io.Source.fromFile(filename).getLines().toList
+	val lines = scala.io.Source.fromFile(filename).getLines.toList
 	followGuide(lines, 5, (2, 0), "", "") match {
 		case (code, code2) => println(code + "\n" + code2);
 	}
