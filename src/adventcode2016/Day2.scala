@@ -24,12 +24,14 @@ object Day2 extends App {
 		case _ => (i, j)
 	}
 
-	def followGuide(guide: List[String], start: Int, start2: (Int, Int),
+	def followGuide(guide: List[String], init: Int, init2: (Int, Int),
 		code: String, code2: String): (String, String) = guide match {
 		case Nil => (code.reverse, code2.reverse)
 		case line :: rest => {
-			val dst = line.foldLeft(start)((cur, dir) => move(dir, cur))
-			val dst2 = line.foldLeft(start2)((cur, dir) => move(dir, cur._1, cur._2))
+			val dst = line.foldLeft(init)((cur, dir) => move(dir, cur))
+			val dst2 = line.foldLeft(init2) {
+				(cur, dir) => move(dir, cur._1, cur._2)
+			}
 			followGuide(rest, dst, dst2, dst + code,
 				keypad(dst2._1)(dst2._2) + code2)
 		}
