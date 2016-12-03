@@ -1,7 +1,5 @@
 package adventcode2016
 
-import scala.io.Source
-
 object Day2 extends App {
 	val filename = "src/adventcode2016/day2_input.txt"
 
@@ -37,7 +35,7 @@ object Day2 extends App {
 		}
 	}
 
-	val lines = Source.fromFile(filename).getLines().toList
+	val lines = scala.io.Source.fromFile(filename).getLines().toList
 	followGuide(lines, 5, (2, 0), "", "") match {
 		case (code, code2) => println(code + "\n" + code2);
 	}
