@@ -15,57 +15,46 @@ case class Point(x: Double, y: Double) {
 }
 
 object Day1 extends App {
-
-	def path(start: Point, dir: Vec, size: Int): List[Point] =
-		(0 until size).toList map { x => start + dir * x }
-
-	@tailrec
-	def getVisitedOrHQ(path: List[Point],
-		visited: Set[Point]): Either[Set[Point], Point] = path match {
-		case Nil => Left(visited)
-		case p :: rem_path =>
-			if (visited contains p) Right(p)
-			else getVisitedOrHQ(rem_path, visited + p)
-	}
+	def expand(step: String): List[Char] =
+		step.head :: List.fill(step.tail.toInt - 1)('S')
 
 	@tailrec
-	def followGuide(start: Point, dir: Vec,
-		guide: List[String], visited: Set[Point],
-		HQ: Option[Point]): (Point, Point) = guide match {
-		case Nil => (start, HQ.getOrElse(Point(0, 0)))
-		case step :: rest => {
-			val size = step.tail.toDouble
-			val new_dir = (step.head: @unchecked) match {
-				case 'L' => dir.rotateLeft
-				case 'R' => dir.rotateRight
-			}
-			//	part 1
-			val dest = start + (new_dir * size)
-
-			// part 2
-			if (HQ.isDefined)
-				followGuide(dest, new_dir, rest, visited, HQ)
-			else {
-				val pathPoints = path(start, new_dir, size.toInt)
-				getVisitedOrHQ(pathPoints, visited) match {
-					case Left(new_visited) =>
-						followGuide(dest, new_dir, rest, new_visited, HQ)
-					case Right(new_HQ) =>
-						followGuide(dest, new_dir, rest, visited, Some(new_HQ))
+	def followGuide(start: Point, dir: Vec, guide: List[Char],
+		visited: Set[Point], HQ: Option[Point]): (Point, Option[Point]) = {
+		guide match {
+			case Nil => (start, HQ)
+			case face :: rest => {
+				val new_dir = (face: @unchecked) match {
+					case 'L' => dir.rotateLeft
+					case 'R' => dir.rotateRight
+					case 'S' => dir
 				}
+				//	part 1
+				val dest = start + new_dir
+
+				val new_HQ = if (HQ.isDefined ||
+					!visited.contains(dest)) HQ else Some(dest)
+
+				followGuide(dest, new_dir, rest, visited + dest, new_HQ)
 			}
 		}
 	}
 
-	val input = "L5, R1, R3, L4, R3, R1, L3, L2, R3, L5, L1, L2, R5, L1, R5, R1, L4, R1, R3, L4, L1, R2, R5, R3, R1, R1, L1, R1, L1, L2, L1, R2, L5, L188, L4, R1, R4, L3, R47, R1, L1, R77, R5, L2, R1, L2, R4, L5, L1, R3, R187, L4, L3, L3, R2, L3, L5, L4, L4, R1, R5, L4, L3, L3, L3, L2, L5, R1, L2, R5, L3, L4, R4, L5, R3, R4, L2, L1, L4, R1, L3, R1, R3, L2, R1, R4, R5, L3, R5, R3, L3, R4, L2, L5, L1, L1, R3, R1, L4, R3, R3, L2, R5, R4, R1, R3, L4, R3, R3, L2, L4, L5, R1, L4, L5, R4, L2, L1, L3, L3, L5, R3, L4, L3, R5, R4, R2, L4, R2, R3, L3, R4, L1, L3, R2, R1, R5, L4, L5, L5, R4, L5, L2, L4, R4, R4, R1, L3, L2, L4, R3"
+	//	val input = "L5, R1, R3, L4, R3, R1, L3, L2, R3, L5, L1, L2, R5, L1, R5, R1, L4, R1, R3, L4, L1, R2, R5, R3, R1, R1, L1, R1, L1, L2, L1, R2, L5, L188, L4, R1, R4, L3, R47, R1, L1, R77, R5, L2, R1, L2, R4, L5, L1, R3, R187, L4, L3, L3, R2, L3, L5, L4, L4, R1, R5, L4, L3, L3, L3, L2, L5, R1, L2, R5, L3, L4, R4, L5, R3, R4, L2, L1, L4, R1, L3, R1, R3, L2, R1, R4, R5, L3, R5, R3, L3, R4, L2, L5, L1, L1, R3, R1, L4, R3, R3, L2, R5, R4, R1, R3, L4, R3, R3, L2, L4, L5, R1, L4, L5, R4, L2, L1, L3, L3, L5, R3, L4, L3, R5, R4, R2, L4, R2, R3, L3, R4, L1, L3, R2, R1, R5, L4, L5, L5, R4, L5, L2, L4, R4, R4, R1, L3, L2, L4, R3"
 	//	val input = "R5, L2, L2, L8"
 	//	val input = "R2, R2, R2"
-	//	val input = "R2, L3"
+	val input = "R2, L3"
 	//	val input = "R8, R4, R4, R8"
 
-	val guide = input.split(", ").toList
+	val guide2 = input.split(", ").toList.map(expand).flatten
 	val start = Point(0, 0)
-	val res = followGuide(start, Vec(0, 1), guide, Set(), None)
+
+	val res = followGuide(start, Vec(0, 1), guide2, Set(start), None)
 	println("Distance from start to destination: " + res._1.dist(start))
-	println("Distance from start to HQ: " + res._2.dist(start))
+
+	if (res._2.isDefined) {
+		println("Distance from start to HQ: " + res._2.getOrElse(Point(0, 0)).dist(start))
+	} else {
+		println("HQ does not exist")
+	}
 }
