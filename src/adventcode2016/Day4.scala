@@ -21,10 +21,9 @@ object Day4 extends App {
 	}
 
 	val part1 = real map (_._2) sum
-	val part2 = real find {
-		case (name, id, _) =>
-			name.map(decrypt(_, id)).equals("northpole object storage")
-	} getOrElse ((Nil, -1, Nil))
+	val part2 = (real find {
+		case (n, id, _) => n.map(decrypt(_, id)) == "northpole object storage"
+	}).get._2
 
-	println(part1 + "\n" + part2._2)
+	println(part1 + "\n" + part2)
 }
