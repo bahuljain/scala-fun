@@ -16,8 +16,6 @@ object Day5 extends App {
 			else getId1(key, pad + 1, id)
 		}
 
-	// Beware calling this function alone can take a lot of time to execute
-	// try with key as "abc" for faster results
 	def getId2(key: String, pad: Int, id: Map[Int, Char]): String =
 		if (id.size == 8) id.toList.sortBy(_._1).map(_._2).mkString.toLowerCase
 		else {
@@ -29,6 +27,5 @@ object Day5 extends App {
 
 	val part1 = getId1(input, 0, Nil);
 	val part2 = getId2(input, 0, Map());
-
 	println(part1 + "\n" + part2)
 }
