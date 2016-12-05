@@ -9,13 +9,12 @@ object Day3 extends App {
 
 	val count1 = lines
 		.map(line => line.trim.split("""\s+""").map(_.toInt))
-		.filter(isValidTriangle).length
+		.count(isValidTriangle)
 
 	val count2 = lines
 		.map(line => line.trim.split("""\s+""").toList.map(_.toInt))
-		.grouped(3).toList
-		.map(_.transpose).flatten
-		.filter(v => isValidTriangle(v.toArray)).length
+		.grouped(3).map(_.transpose).flatten
+		.count(v => isValidTriangle(v.toArray))
 
 	println(count1 + "\n" + count2)
 }

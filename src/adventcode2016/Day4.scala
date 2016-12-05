@@ -19,7 +19,7 @@ object Day4 extends App {
 
 	val part1 = real_rooms map (_._2) sum
 	val part2 = (real_rooms find {
-		case (n, id, _) => n.map(decrypt(_, id)).startsWith("north")
+		case (n, id, _) => n.map(decrypt(_, id)) startsWith "north"
 	}).get._2
 
 	println(part1 + "\n" + part2)
