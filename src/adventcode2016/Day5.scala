@@ -19,7 +19,8 @@ object Day5 extends App {
 	def getId2(key: String, pad: Int, id: Map[Int, Char]): String =
 		if (id.size == 8) id.toList.sortBy(_._1).map(_._2).mkString.toLowerCase
 		else {
-			val hash = md5(key + pad); val pos = hash(5) - 48;
+			val hash = md5(key + pad)
+			val pos = hash(5) - 48
 			if (hash.startsWith("00000") && pos < 8 && !id.contains(pos))
 				getId2(key, pad + 1, id + (pos -> hash(6)))
 			else getId2(key, pad + 1, id)
