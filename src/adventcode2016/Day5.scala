@@ -26,7 +26,5 @@ object Day5 extends App {
 			else getId2(key, pad + 1, id)
 		}
 
-	val part1 = getId1(input, 0, Nil);
-	val part2 = getId2(input, 0, Map());
-	println(part1 + "\n" + part2)
+	println(getId1(input, 0, Nil) + "\n" + getId2(input, 0, Map()))
 }
