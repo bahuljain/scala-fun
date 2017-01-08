@@ -18,19 +18,16 @@ object Day7 extends App {
 
 	val TLSSupport = ips count {
 		case (hypernets, supernets) =>
-			!hypernets.map(containsABBA).contains(true) &&
-				supernets.map(containsABBA).contains(true)
+			!hypernets.exists(containsABBA) && supernets.exists(containsABBA)
 	}
 
 	val SSLSupport = ips count {
 		case (hypernets, supernets) =>
 			supernets exists { supernet =>
 				supernet.sliding(3) exists { seq =>
+					val bab = "" + seq(1) + seq(0) + seq(1)
 					seq(0) == seq(2) && seq(0) != seq(1) &&
-						hypernets.exists { hypernet =>
-							val bab = "" + seq(1) + seq(0) + seq(1)
-							hypernet.sliding(3).exists(_ == bab)
-						}
+						hypernets.exists(_.indexOf(bab) != -1)
 				}
 			}
 	}
