@@ -1,8 +1,7 @@
 package adventcode2016
 
 object Day9 extends App {
-	val filename = "src/adventcode2016/day9_input.txt"
-	val format = scala.io.Source.fromFile(filename).mkString
+	val format = scala.io.Source.fromFile("src/adventcode2016/day9_input.txt").mkString
 	val r_marker = """\((\d+)x(\d+)\)""".r
 
 	def decompress_V1(pos: Int, len: Int): Int = format.indexOf('(', pos) match {
@@ -17,7 +16,6 @@ object Day9 extends App {
 			}
 		}
 	}
-	println(decompress_V1(0, 0))
 
 	def decompress_V2(pos: Int, len: Long, fmt: String): Long =
 		fmt.indexOf('(', pos) match {
@@ -33,5 +31,5 @@ object Day9 extends App {
 				}
 			}
 		}
-	println(decompress_V2(0, 0, format))
+	println(decompress_V1(0, 0), decompress_V2(0, 0, format))
 }
