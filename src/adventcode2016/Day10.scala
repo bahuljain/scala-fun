@@ -1,7 +1,6 @@
 package adventcode2016
 
 import scala.collection.immutable.Queue
-import scala.io.Source
 
 case class Bot(n: String, low: Int = Integer.MAX_VALUE, high: Int = Integer.MAX_VALUE) {
 	override def toString: String = "(" + low + ", " + high + ")"
@@ -9,21 +8,21 @@ case class Bot(n: String, low: Int = Integer.MAX_VALUE, high: Int = Integer.MAX_
 	def canGive(): Boolean = low != Integer.MAX_VALUE && high != Integer.MAX_VALUE
 	def give(l: String, h: String, workforce: Map[String, Bot]): Map[String, Bot] = {
 		if (low == 17 && high == 61) println("The bot that compares 17 and 61 is " + n);
-		val lo = workforce.get(l) match {
+		val lB = workforce.get(l) match {
 			case Some(bot) => bot.take(low)
 			case None => Bot(l).take(low)
 		}
-		val hi = workforce.get(h) match {
+		val hB = workforce.get(h) match {
 			case Some(bot) => bot.take(high)
 			case None => Bot(h).take(high)
 		}
-		workforce + (l -> lo) + (h -> hi) - n
+		workforce + (l -> lB) + (h -> hB) - n
 	}
 }
 
 object Day10 extends App {
 	val filename = "src/adventcode2016/day10_input.txt"
-	val instructions = Queue(Source.fromFile(filename).getLines.toList: _*)
+	val instructions = Queue(scala.io.Source.fromFile(filename).getLines.toList: _*)
 	val r_take = """value (\d+) goes to (bot \d+)""".r
 	val r_give = """(bot \d+) gives low to ((bot|output) \d+) and high to ((bot|output) \d+)""".r
 
