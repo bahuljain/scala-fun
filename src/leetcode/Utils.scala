@@ -1,3 +1,5 @@
+package leetcode
+
 object Utils {
     def time[R](block: => R): R = {
     val t0 = System.nanoTime()
