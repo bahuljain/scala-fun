@@ -1,3 +1,5 @@
+package leetcode
+
 object DetectCapital extends App {
   def isCapital(c: Char): Boolean = c >= 'A' && c <= 'Z'
   def detectCapitalUse(word: String): Boolean = word.toList match {
