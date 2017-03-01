@@ -1,3 +1,5 @@
+package leetcode
+
 object DisapppearedNumbers extends App {
     def findDisappearedNumbers(nums: Array[Int]): List[Int] =
       nums.foldLeft(List.range(1, nums.length).toSet) { (acc, cur) => acc - cur } toList
