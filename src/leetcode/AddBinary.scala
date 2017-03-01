@@ -28,6 +28,25 @@ object AddBinary extends App {
 		aux(bs1.toList.reverse, bs2.toList.reverse, '0', Nil).mkString("")
 	}
 
+	def addBinary1(a: String, b: String): String = {
+		def aux(a: List[Char], b: List[Char]): List[Char] = {
+			val res = a.reverse.zipAll(b.reverse, '0', '0').foldLeft((List[Char](), '0')) { (acc, cur) =>
+				val res = add(acc._2 :: cur._1 :: cur._2 :: Nil)
+				(res._1 :: acc._1, res._2)
+	      		}
+	      		if (res._2 == '0') res._1 else res._2 :: res._1
+	    	}
+
+	    	def add(digits: List[Char]): (Char, Char) = digits.count(_ == '1') match {
+	      		case 0 => ('0', '0')
+	      		case 1 => ('1', '0')
+		      	case 2 => ('0', '1')
+		      	case 3 => ('1', '1')
+		}
+
+	   	aux(a.toList, b.toList).mkString		
+	}
+	
 	println(addBinary("101", "11"))
 	println(addBinary("101", "111"))
 	println(addBinary("10101010", "1010101"))
