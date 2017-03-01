@@ -1,3 +1,5 @@
+package leetcode
+
 object IslandPerimeter extends App {
   val grid = Array(
     Array(0, 1, 0, 0),
