@@ -1,3 +1,5 @@
+package leetcode
+
 import Utils.time
 
 object ConstructRectangle extends App {
