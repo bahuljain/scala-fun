@@ -1,3 +1,5 @@
+package leetcode
+
 object FizzBuzz extends App {
   def fizzbuzz(n: Int): List[String] = (1 to n).toList map { i =>
     if (i % 15 == 0) "FizzBuzz"
