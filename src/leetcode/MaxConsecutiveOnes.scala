@@ -1,3 +1,5 @@
+package leetcode
+
 import scala.annotation.tailrec
 import Utils.time
 
