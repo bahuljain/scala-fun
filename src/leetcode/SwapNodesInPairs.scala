@@ -14,6 +14,9 @@ object SwapNodesInPairs extends App {
 		aux(list, Nil).reverse
 	}
 
+	def swapInPairs1[T](list: List[T]): List[T] =
+		list.grouped(2).map(_.reverse).flatten.toList
+	
 	assert(swapInPairs(List(1, 2, 3, 4, 5)) == List(2, 1, 4, 3, 5))
 	assert(swapInPairs(List()) == List())
 	assert(swapInPairs(List(1)) == List(1))
